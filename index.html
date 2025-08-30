@@ -3,154 +3,198 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Confexy — Jogue com amigos, fácil</title>
-  <meta name="description" content="Confexy: jogue com amigos em segundos. Compartilhe seu código, convide e entre direto no app. Disponível para Android." />
-  <meta property="og:title" content="Confexy — Jogue com amigos, fácil" />
-  <meta property="og:description" content="Compartilhe seu código e jogue com amigos em segundos." />
+  <title>Confexy — Descubra desejos em comum</title>
+  <meta name="description" content="Confexy é um jogo social intimista para descobrir desejos em comum com quem você gosta. Deslize, combine e se surpreenda — com privacidade e leveza." />
+  <meta property="og:title" content="Confexy — Descubra desejos em comum" />
+  <meta property="og:description" content="Deslize por cartas de desejos, faça matches discretos e descubra afinidades inesperadas." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.confexy.com.br/" />
-  <meta name="theme-color" content="#6c5ce7" />
+  <meta property="og:image" content="https://www.confexy.com.br/assets/feature-graphic-1024x500.png" />
+  <meta name="theme-color" content="#7F56D9" />
 
   <style>
     :root{
-      --brand:#6c5ce7;         /* cor primária (mude aqui se quiser) */
-      --bg:#0f0f12;            /* fundo escuro elegante */
-      --text:#eaeaf0;
-      --muted:#a7a7b3;
-      --card:#15151b;
-      --card2:#1b1b24;
-      --stroke:#262634;
-      color-scheme: light dark;
+      --brand:#7F56D9;                 /* primary */
+      --brand-600:#6d46c8;             /* hover */
+      --brand-dark:#432E73;            /* deep accent */
+      --bg:#2E1A47;                    /* background */
+      --text:#ffffff;                   /* text */
+      --muted:#D9D6E6;                 /* soft text */
+      --glass:rgba(160,160,160,0.15);  /* glass */
+      --glass-border:rgba(180,180,180,0.30);
+      --stroke:rgba(140,140,140,0.25);
+      color-scheme: dark;
     }
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial}
+    html,body{margin:0;padding:0;background:radial-gradient(1200px 800px at 10% -10%, rgba(127,86,217,.25), transparent),
+                                   radial-gradient(1000px 700px at 100% 0%, rgba(67,46,115,.30), transparent),
+                                   var(--bg);
+              color:var(--text);font:16px/1.5 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial}
     a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
     .container{max-width:1120px;margin:0 auto;padding:24px}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+
+    /* Nav */
+    .nav{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,#2E1A47cc,#2E1A4700);backdrop-filter:saturate(140%) blur(6px)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
     .logo{display:flex;align-items:center;gap:12px}
-    .logo-badge{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand),#9b7bff);}
-    .logo-title{font-weight:700;letter-spacing:.2px}
+    .logo-img{height:24px}
+    .logo-badge{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand),#b197ff);box-shadow:0 10px 24px rgba(127,86,217,.35)}
+    .logo-title{font-weight:800;letter-spacing:.2px}
     .cta{display:flex;gap:10px;flex-wrap:wrap}
+    .ghost-btn, .primary-btn{display:inline-flex;align-items:center;gap:10px;border-radius:12px;padding:12px 16px;font-weight:700}
+    .primary-btn{background:var(--brand);color:white;border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 36px rgba(127,86,217,.35);transition:transform .08s ease, box-shadow .18s ease, background .18s ease}
+    .primary-btn:hover{transform:translateY(-1px);background:var(--brand-600);box-shadow:0 16px 42px rgba(127,86,217,.45)}
+    .ghost-btn{background:transparent;border:1px solid var(--glass-border);color:var(--text)}
+    .ghost-btn:hover{border-color:#d6cfff44}
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:32px;margin-top:44px}
-    .headline{font-size:clamp(28px,4vw,44px);font-weight:800;line-height:1.1;margin:0 0 10px}
-    .sub{color:var(--muted);font-size:clamp(15px,1.4vw,18px);margin:0 0 20px}
-    .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--stroke);background:var(--card);padding:8px 12px;border-radius:999px;color:var(--muted);font-size:13px;margin-bottom:12px}
-    .primary-btn, .ghost-btn{
-      display:inline-flex;align-items:center;gap:10px;
-      background:var(--brand);color:white;border:none;border-radius:12px;
-      padding:12px 16px;font-weight:600;box-shadow:0 10px 30px rgba(108,92,231,.25);
-      transition:transform .08s ease, box-shadow .2s ease;
-    }
-    .primary-btn:hover{transform:translateY(-1px);box-shadow:0 14px 34px rgba(108,92,231,.35)}
-    .ghost-btn{background:transparent;border:1px solid var(--stroke);color:var(--text)}
-    .ghost-btn:hover{border-color:#38384a}
+    /* Section helpers */
+    section{padding:56px 0;border-top:1px solid var(--stroke)}
+    .max{max-width:960px;margin:0 auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--glass-border);background:var(--glass);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px;margin-bottom:10px}
+    .h1{font-size:clamp(30px,5vw,48px);line-height:1.1;margin:0 0 10px;font-weight:900}
+    .h2{font-size:clamp(22px,3.2vw,30px);line-height:1.2;margin:0 0 8px;font-weight:800}
+    .sub{color:var(--muted);font-size:clamp(15px,1.4vw,18px);margin:0 0 18px}
 
-    /* Mock device */
-    .mock{
-      background:linear-gradient(180deg,var(--card),var(--card2));
-      border:1px solid var(--stroke);border-radius:20px;padding:18px;position:relative;
-      box-shadow:0 12px 40px rgba(0,0,0,.35)
-    }
-    .device{
-      background:#0c0c11;border:1px solid #222333;border-radius:24px;height:520px;
-      display:grid;place-items:center;overflow:hidden;position:relative
-    }
-    .device > div{width:92%;max-width:360px}
-    .code-card{
-      background:linear-gradient(180deg,#13131b,#0e0e14);
-      border:1px dashed #2e2e40;border-radius:16px;padding:16px;margin-top:16px;
-    }
-    .code{font-size:28px;font-weight:800;letter-spacing:2px}
-    .muted{color:var(--muted)}
+    /* HERO vertical */
+    .hero{display:grid;gap:18px}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));backdrop-filter: blur(10px);
+          border:1px solid var(--glass-border);border-radius:18px;padding:18px}
 
-    /* Features */
-    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:56px 0}
-    .feature{
-      background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:18px;
-    }
-    .f-title{font-weight:700;margin:6px 0 6px}
+    /* Screens carousel */
+    .carousel{position:relative}
+    .rail{display:grid;grid-auto-flow:column;grid-auto-columns:80%;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px}
+    .rail::-webkit-scrollbar{height:10px}
+    .rail::-webkit-scrollbar-thumb{background:rgba(255,255,255,.14);border-radius:999px}
+    .slide{scroll-snap-align:center;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--glass-border);border-radius:18px;padding:12px}
+    .slide img{border-radius:12px}
+    .dots{display:flex;gap:8px;justify-content:center;margin-top:12px}
+    .dot{width:8px;height:8px;border-radius:999px;background:#ffffff30}
+    .dot.active{background:#ffffffaa}
+
+    /* Features grid */
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .feature{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border:1px solid var(--glass-border);border-radius:16px;padding:18px}
     .f-desc{color:var(--muted);font-size:15px;margin:0}
 
+    /* Steps */
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .step{border:1px dashed var(--glass-border);border-radius:14px;padding:16px;background:rgba(255,255,255,.03)}
+    .step b{display:block;margin-bottom:6px}
+
+    /* Big CTA */
+    .cta-card{display:grid;gap:12px;place-items:center;text-align:center;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--glass-border);border-radius:18px;padding:24px}
+
     /* Footer */
-    .footer{border-top:1px solid var(--stroke);padding:18px 0;margin-top:40px;color:var(--muted);font-size:14px}
+    .footer{border-top:1px solid var(--glass-border);padding:24px 0;color:var(--muted);font-size:14px}
     .links{display:flex;gap:14px;flex-wrap:wrap}
-    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--stroke);background:var(--card);color:var(--muted);font-size:13px}
 
     /* Responsive */
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr}
-      .features{grid-template-columns:1fr}
-    }
+    @media (min-width:1080px){.rail{grid-auto-columns:33%}}
+    @media (max-width:900px){.grid3{grid-template-columns:1fr}.steps{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <header class="container nav">
-    <div class="logo">
-      <div class="logo-badge" aria-hidden="true"></div>
-      <div class="logo-title">Confexy</div>
-    </div>
-    <div class="cta">
-      <a class="ghost-btn" href="https://play.google.com/store/apps/details?id=com.confexy">Baixar na Play Store</a>
-      <a class="ghost-btn" href="https://legal.confexy.com.br/privacy-policy.html">Privacidade</a>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <div>
-        <div class="chip">✨ Jogue com amigos em segundos</div>
-        <h1 class="headline">Convide. Conecte. Jogue.<br/>Sem complicação.</h1>
-        <p class="sub">Compartilhe seu código <strong>ABC-123</strong>, envie o link e pronto — se o amigo tiver o app, abre direto; se não tiver, vai para a Play Store instalar.</p>
-        <div class="cta">
-          <a class="primary-btn" href="https://play.google.com/store/apps/details?id=com.confexy">Baixar na Play Store</a>
-          <a class="ghost-btn" href="#como-funciona">Como funciona</a>
-        </div>
-        <div style="margin-top:14px" class="links">
-          <span class="pill">Android • API 35</span>
-          <span class="pill">Notificações • Firebase</span>
-          <span class="pill">Login seguro</span>
-        </div>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="logo">
+        <img class="logo-img" src="assets/titlelogo.png" alt="Confexy" />
       </div>
+      <div class="cta">
+        <a class="ghost-btn" href="#como-funciona">Como funciona</a>
+        <a class="primary-btn" href="https://play.google.com/store/apps/details?id=com.confexy">Baixar agora</a>
+      </div>
+    </div>
+  </nav>
 
-      <div class="mock">
-        <div class="device">
-          <div>
-            <h3 style="margin:0 0 6px">Adicionar amigo</h3>
-            <p class="muted" style="margin:0">Seu código</p>
-            <div class="code-card">
-              <div class="code">ABC-123</div>
-              <p class="muted" style="margin:8px 0 0">Compartilhe seu código e jogue agora</p>
-            </div>
-            <div style="display:flex;gap:10px;margin-top:16px">
-              <a class="primary-btn" href="https://www.confexy.com.br/invite.html?code=ABC-123">Compartilhar</a>
-              <a class="ghost-btn" href="#como-funciona">Ver mais</a>
-            </div>
+  <main>
+    <!-- HERO -->
+    <section class="container hero">
+      <div class="max">
+        <span class="eyebrow">✨ Descubra desejos em comum</span>
+        <h1 class="h1">Um jogo intimista para revelar o que conecta vocês.</h1>
+        <p class="sub">Você desliza. A outra pessoa desliza. Quando os dois gostam da mesma carta, o match aparece — discreto, direto e envolvente. Surpresas viram risadas, conversas e novas histórias.</p>
+        <div class="hero-card">
+          <img src="assets/feature-graphic-1024x500.png" alt="Confexy – feature" />
+          <div class="cta" style="margin-top:14px">
+            <a class="primary-btn" href="https://play.google.com/store/apps/details?id=com.confexy">Baixar na Play Store</a>
+            <a class="ghost-btn" href="#screens">Ver o app</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="como-funciona" class="features">
-      <div class="feature">
-        <div class="f-title">1) Compartilhe seu código</div>
-        <p class="f-desc">Toque em “Compartilhar” no app. Enviamos um link inteligente por WhatsApp, e-mail, etc.</p>
+    <!-- CAROUSEL (screenshots da Play) -->
+    <section id="screens" class="container carousel">
+      <div class="max">
+        <h2 class="h2" style="margin-bottom:10px">Uma prévia do que você vai ver</h2>
+        <p class="sub">Screenshots oficiais do app — interface moderna, foco em conexão e privacidade.</p>
+        <div class="rail" id="rail">
+          <div class="slide"><img src="assets/screenshot-1.png" alt="Descubra desejos em comum" loading="lazy"></div>
+          <div class="slide"><img src="assets/screenshot-2.png" alt="Jogue com amigos" loading="lazy"></div>
+          <div class="slide"><img src="assets/screenshot-3.png" alt="Privacidade garantida" loading="lazy"></div>
+          <div class="slide"><img src="assets/screenshot-4.png" alt="Deu match" loading="lazy"></div>
+          <div class="slide"><img src="assets/screenshot-5.png" alt="Crie novos matches" loading="lazy"></div>
+        </div>
+        <div class="dots" id="dots"></div>
       </div>
-      <div class="feature">
-        <div class="f-title">2) Link inteligente</div>
-        <p class="f-desc">Se o amigo tiver o app, abrimos direto na tela de convite. Se não, Play Store.</p>
+    </section>
+
+    <!-- BENEFÍCIOS/EXPERIÊNCIA -->
+    <section class="container">
+      <div class="max">
+        <h2 class="h2">Por que jogar Confexy?</h2>
+        <p class="sub">Focado em momentos reais: leveza, surpresa e cumplicidade.</p>
+        <div class="grid3">
+          <div class="feature">
+            <h3 class="h3" style="margin:0 0 6px">Descobertas em comum</h3>
+            <p class="f-desc">Conheça lados de quem você gosta sem precisar dizer em voz alta. Cada match revela algo que aproxima.</p>
+          </div>
+          <div class="feature">
+            <h3 class="h3" style="margin:0 0 6px">Leve, divertido, íntimo</h3>
+            <p class="f-desc">Nada de pressão. Só cartas, deslizes e conversas que surgem naturalmente.</p>
+          </div>
+          <div class="feature">
+            <h3 class="h3" style="margin:0 0 6px">Privacidade de verdade</h3>
+            <p class="f-desc">As escolhas são confidenciais. Só aparece quando os dois concordam.</p>
+          </div>
+        </div>
       </div>
-      <div class="feature">
-        <div class="f-title">3) Joguem juntos</div>
-        <p class="f-desc">Adicionou? Pronto. Vocês já podem jogar e receber convites/avisos por push.</p>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section id="como-funciona" class="container">
+      <div class="max">
+        <h2 class="h2">Como funciona</h2>
+        <p class="sub">Comece em minutos, sem complicação.</p>
+        <div class="steps">
+          <div class="step"><b>1) Crie seu perfil</b> Personalize em poucos toques.</div>
+          <div class="step"><b>2) Convide alguém</b> Jogue com seu par ou amigos.</div>
+          <div class="step"><b>3) Deslize as cartas</b> Curta o que combina com você.</div>
+          <div class="step"><b>4) Deu match</b> Quando os dois curtirem a mesma carta, a mágica acontece.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA DOWNLOAD -->
+    <section class="container">
+      <div class="max cta-card">
+        <img src="assets/icone1.png" alt="Ícone Confexy" style="width:72px;height:72px;border-radius:16px" />
+        <h2 class="h2" style="margin:0">Pronto para se surpreender juntos?</h2>
+        <p class="sub" style="margin:0 0 6px">Baixe o Confexy e descubra desejos em comum — com privacidade e leveza.</p>
+        <a class="primary-btn" href="https://play.google.com/store/apps/details?id=com.confexy">Baixar agora</a>
       </div>
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="container footer">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
-      <div>© <span id="y"></span> Confexy</div>
+    <div class="max" style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="assets/icone1.png" alt="Confexy" style="width:28px;height:28px;border-radius:6px" />
+        <span>© <span id="y"></span> Confexy</span>
+      </div>
       <div class="links">
         <a href="https://legal.confexy.com.br/terms-conditions.html">Termos</a>
         <span>•</span>
@@ -163,6 +207,30 @@
     </div>
   </footer>
 
-  <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+  <script>
+    // year
+    document.getElementById('y').textContent=new Date().getFullYear();
+
+    // carousel dots
+    const rail = document.getElementById('rail');
+    const dotsC = document.getElementById('dots');
+    const slides = Array.from(rail.children);
+    slides.forEach((_,i)=>{
+      const d=document.createElement('button');
+      d.className='dot'; d.ariaLabel = `Ir para slide ${i+1}`; d.addEventListener('click',()=>{
+        rail.scrollTo({left:slides[i].offsetLeft-rail.offsetLeft,behavior:'smooth'});
+      });
+      dotsC.appendChild(d);
+    });
+    function setDot(){
+      const mid = rail.scrollLeft + rail.clientWidth/2;
+      let idx=0, min=Infinity;
+      slides.forEach((s,i)=>{const c=Math.abs(s.offsetLeft + s.clientWidth/2 - mid); if(c<min){min=c; idx=i;}});
+      Array.from(dotsC.children).forEach((d,i)=>d.classList.toggle('active',i===idx));
+    }
+    setDot();
+    rail.addEventListener('scroll',()=>requestAnimationFrame(setDot));
+    window.addEventListener('resize',setDot);
+  </script>
 </body>
 </html>
